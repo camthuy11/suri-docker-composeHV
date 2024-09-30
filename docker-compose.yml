@@ -164,6 +164,18 @@ services:
         condition: service_healthy
     networks:
       - elastic_net
+    
+  alerting1:
+    image: minkurudev/alerting:1.0.0
+    environment:
+      - bot_name=Alertbot-1
+      - webhook_url=https://discord.com/api/webhooks/1290340202866278482/nnsXtbEUPlJLrRa07fNH5PlE4roX7nDnYiqdeMrxVaOZ__AK-iseeKxMgrW2ZBn8rqcr
+    depends_on:
+      - kibana
+    command: ["es01", "kibana", "suricata", "filebeat"]
+    networks:
+      - elastic_net
+
 
 volumes:
   certs:
